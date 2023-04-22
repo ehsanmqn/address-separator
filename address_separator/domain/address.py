@@ -1,21 +1,37 @@
 import re
 
+# from pyspark.sql.functions import regexp_extract
+
 
 class Address:
     """
     The Address class represents an address object with a street name and house number.
     """
+
     def __init__(self, street, house_number):
         self.street = street
         self.house_number = house_number
 
     @classmethod
-    def from_string(cls, address_str):
-        regex = r"^(?P<street>[\w\säöüÄÖÜß]+) (?P<house_number>[\d\s\w/]+)$"
+    def from_string_simple(cls, address):
+        # Regex patterns for street name and number
+        patterns = [
+            r'(?P<street>[\w\s]+) (?P<house_number>No \d+[a-zA-Z]*)',
+            r'(?P<street>[\w\s]+) (?P<house_number>\d+[a-zA-Z]*\s?\w?)',
+            r'(?P<house_number>\d+[a-zA-Z]*) (?P<street>[\w\s]+)',
+            r'(?P<street>[\w\s]+),? (?P<house_number>\d+[a-zA-Z]*)',
+            r'(?P<house_number>\d+[a-zA-Z]*)?,? (?P<street>[\w\s]+)'
+        ]
 
-        match = re.match(regex, address_str)
+        # Iterate over each patter to find a match
+        for pattern in patterns:
+            match = re.search(pattern, address)
+            if match:
+                groups = match.groupdict()
+                street_name = groups['street'].strip()
+                house_number = groups['house_number'].strip()
+                return cls(street_name, house_number)
 
-        if not match:
-            raise ValueError(f"Invalid address: {address_str}")
+        raise ValueError(f"Invalid address: {address}")
 
-        return cls(match.group("street"), match.group("house_number"))
+

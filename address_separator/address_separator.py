@@ -15,5 +15,6 @@ class AddressSeparator:
             return {}
 
         # parse address into street and house number using Address class
-        address = Address.from_string(address_str)
+        address = Address.from_string_simple(address_str)
+
         return {"street": address.street, "housenumber": address.house_number}
