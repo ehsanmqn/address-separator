@@ -72,12 +72,12 @@ The "from_string_simple" method uses python's re module to iterate over the patt
 
 The "from_string_pandas" method uses pandas library to extract the street name and house number from the address string. It creates a DataFrame with the address string and then iterates over the patterns to extract the street name and house number using the "str.extract()" method of pandas. If both street name and house number are extracted, it creates an Address object with those values. If no match is found, it raises a ValueError indicating that the address is invalid.
 
-### 
 ## Running tests
 In order to run tests, run following command:
 
 ```bash
-python -m unittest address_separator
+cd address_separator
+python -m unittest
 ```
 
 ## Contributing
