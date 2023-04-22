@@ -10,11 +10,23 @@ class Address:
 
     # Regex patterns for street name and number
     patterns = [
-        r'(?P<street>[\w\s]+) (?P<house_number>No \d+[a-zA-Z]*)',
-        r'(?P<street>[\w\s]+) (?P<house_number>\d+[a-zA-Z]*\s?\w?)',
-        r'(?P<house_number>\d+[a-zA-Z]*) (?P<street>[\w\s]+)',
-        r'(?P<street>[\w\s]+),? (?P<house_number>\d+[a-zA-Z]*)',
-        r'(?P<house_number>\d+[a-zA-Z]*)?,? (?P<street>[\w\s]+)'
+        # This pattern matches a specific format where the building name comes before the house number, such as "Taipei 101, No. 7".
+        r'(?P<street>[\w\s-]+),?\s*(?P<house_number>No\.?\s*\d+[a-zA-Z]?)',
+
+        # This pattern matches a street name followed by "No" and a house number that may include letters, such as "No 123" or "No 123A".
+        r'(?P<street>[\w\s-]+) (?P<house_number>No \d+[a-zA-Z]*)',
+
+        # This pattern matches a street name (or street name with slash) followed by a house number that may include letters, such as "123", "123A", or "123 A".
+        r'(?P<street>[\w\s-]+(?:/[\w\s]+)?)\s+(?P<house_number>\d+[a-zA-Z]*\s?\w?)',
+
+        # This pattern matches a house number that may include letters followed by a street name.
+        r'(?P<house_number>\d+[a-zA-Z]*) (?P<street>[\w\s-]+)',
+
+        # This pattern matches a street name followed by an optional comma and a house number that may include letters.
+        r'(?P<street>[\w\s-]+),? (?P<house_number>\d+[a-zA-Z]*)',
+
+        # This pattern matches a house number that may include letters followed by an optional comma and a street name.
+        r'(?P<house_number>\d+[a-zA-Z]*)?,? (?P<street>[\w\s-]+)'
     ]
 
     def __init__(self, street, house_number):
