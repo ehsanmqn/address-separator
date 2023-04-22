@@ -131,6 +131,54 @@ class TestAddressSeparator(unittest.TestCase):
         result = self.validator.validate(address)
         self.assertTrue(result)
 
+    def test_separate_method_for_uk_address(self):
+        result = self.separator.separate("10 Downing Street")
+        self.assertEqual(result, {'street': 'Downing Street', 'housenumber': '10'})
+
+    def test_separate_method_for_italy_address(self):
+        result = self.separator.separate("Piazza del Colosseo, 1")
+        self.assertEqual(result, {'street': 'Piazza del Colosseo', 'housenumber': '1'})
+
+    def test_separate_method_for_denmark_address(self):
+        result = self.separator.separate("Rådhuspladsen 1")
+        self.assertEqual(result, {'street': 'Rådhuspladsen', 'housenumber': '1'})
+
+    def test_separate_method_for_poland_address(self):
+        result = self.separator.separate("Królewska 11A")
+        self.assertEqual(result, {'street': 'Królewska', 'housenumber': '11A'})
+
+    def test_separate_method_for_belgium_address(self):
+        result = self.separator.separate("Rue de la Loi/Wetstraat 175")
+        self.assertEqual(result, {'street': 'Rue de la Loi/Wetstraat', 'housenumber': '175'})
+
+    def test_separate_method_for_spain_address(self):
+        result = self.separator.separate("Gran Via de les Corts Catalanes, 585")
+        self.assertEqual(result, {'street': 'Gran Via de les Corts Catalanes', 'housenumber': '585'})
+
+    def test_separate_method_for_germany_address(self):
+        result = self.separator.separate("Unter den Linden 77")
+        self.assertEqual(result, {'street': 'Unter den Linden', 'housenumber': '77'})
+
+    def test_separate_method_for_london_address(self):
+        result = self.separator.separate("The Shard, 32 London Bridge Street")
+        self.assertEqual(result, {'street': 'London Bridge Street', 'housenumber': '32'})
+
+    def test_separate_method_for_taipei_address(self):
+        result = self.separator.separate("Taipei 101, No. 7")
+        self.assertEqual(result, {'street': 'Taipei 101', 'housenumber': 'No. 7'})
+
+    def test_separate_method_for_france_address(self):
+        result = self.separator.separate("7 Rue de Rivoli")
+        self.assertEqual(result, {'street': 'Rue de Rivoli', 'housenumber': '7'})
+
+    def test_separate_method_for_dashed_address(self):
+        result = self.separator.separate("Max-Joseph-Platz 1")
+        self.assertEqual(result, {'street': 'Max-Joseph-Platz', 'housenumber': '1'})
+
+    def test_separate_method_for_dashed_with_dot_address(self):
+        result = self.separator.separate("Max-Joseph-Platz, No. 1")
+        self.assertEqual(result, {'street': 'Max-Joseph-Platz', 'housenumber': 'No. 1'})
+
     def test_validator(self):
         pass
 
