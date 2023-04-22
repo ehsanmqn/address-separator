@@ -15,17 +15,16 @@ class Separator:
     The AddressSeparator class is responsible for separating the street name and house number from the address string.
     """
 
-    def __init__(self, parser: str):
-        self.parser = parser
+    def __init__(self):
         self.validator = Validator()
 
-    def separate(self, address_str):
+    def separate(self, address_str, parser="regex"):
         # validate address_str before processing
         if not self.validator.validate(address_str):
             return {}
 
         # parse address into street and house number using Address class
-        match self.parser:
+        match parser:
             case "regex":
                 address = Address.from_string_simple(address_str)
             case "pandas":
