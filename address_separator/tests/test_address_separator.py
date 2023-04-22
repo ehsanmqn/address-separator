@@ -2,13 +2,13 @@ import unittest
 
 from domain.address import Address
 from infra.validator import Validator
-from separator import AddressSeparator
+from separator import Separator
 
 
 class TestAddressSeparator(unittest.TestCase):
 
     def setUp(self):
-        self.separator = AddressSeparator()
+        self.separator = Separator()
         self.validator = Validator()
 
     def test_separate_method(self):
