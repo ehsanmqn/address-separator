@@ -1,1 +1,1 @@
-from .address_separator import AddressSeparator
+from .separator import AddressSeparator

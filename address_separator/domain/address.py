@@ -28,9 +28,11 @@ class Address:
             match = re.search(pattern, address)
             if match:
                 groups = match.groupdict()
-                street_name = groups['street'].strip()
-                house_number = groups['house_number'].strip()
-                return cls(street_name, house_number)
+
+                if groups['street'] is not None and groups['house_number'] is not None:
+                    street_name = groups['street'].strip()
+                    house_number = groups['house_number'].strip()
+                    return cls(street_name, house_number)
 
         raise ValueError(f"Invalid address: {address}")
 

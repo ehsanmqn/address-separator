@@ -1,11 +1,12 @@
-from .domain.address import Address
-from .infra.validator import Validator
+from domain.address import Address
+from infra.validator import Validator
 
 
 class AddressSeparator:
     """
     The AddressSeparator class is responsible for separating the street name and house number from the address string.
     """
+
     def __init__(self):
         self.validator = Validator()
 
@@ -15,6 +16,8 @@ class AddressSeparator:
             return {}
 
         # parse address into street and house number using Address class
-        address = Address.from_string_simple(address_str)
-
-        return {"street": address.street, "housenumber": address.house_number}
+        try:
+            address = Address.from_string_simple(address_str)
+            return {"street": address.street, "housenumber": address.house_number}
+        except ValueError as error:
+            return {}
