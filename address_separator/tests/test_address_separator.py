@@ -22,8 +22,8 @@ class TestAddressSeparator(unittest.TestCase):
         # test that an empty dictionary is returned for an invalid address
         invalid_address = "Invalid address"
 
-        result = self.separator.separate(invalid_address)
-        self.assertEqual(result, {})
+        with self.assertRaises(ValueError):
+            self.separator.separate(invalid_address)
 
     def test_separate_valid_address(self):
         # test that a valid address is separated into street name and house number
@@ -87,8 +87,9 @@ class TestAddressSeparator(unittest.TestCase):
     def test_separate_empty_address(self):
         # test that an empty dictionary is returned for an empty address string
         empty_address = ""
-        result = self.separator.separate(empty_address)
-        self.assertEqual(result, {})
+
+        with self.assertRaises(ValueError):
+            self.separator.separate(empty_address)
 
     def test_separate_multiple_spaces(self):
         # test that a valid address with multiple spaces between words is separated into street name and house number
@@ -100,9 +101,8 @@ class TestAddressSeparator(unittest.TestCase):
     def test_separate_no_house_number(self):
         # test that a valid address with no house number is separated into street name and an empty house number
         address = "Some Street"
-        expected_result = {}
-        result = self.separator.separate(address)
-        self.assertEqual(result, expected_result)
+        with self.assertRaises(ValueError):
+            self.separator.separate(address)
 
     def test_separate_non_alphanumeric_house_number(self):
         # test that a valid address with a non-alphanumeric character in the house number is separated into street name and house number
