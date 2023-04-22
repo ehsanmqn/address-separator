@@ -1,6 +1,8 @@
 import re
 
 import pandas as pd
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import regexp_extract
 
 
 class Address:
@@ -25,12 +27,11 @@ class Address:
     def from_string_simple(cls, address):
         """
         Parse string address using simple python regular expression
-        :param address:
+        :param address: Input address in string format
         :return: Address object
         """
 
         # Iterate over each patter to find a match
-        counter = 0
         for pattern in cls.patterns:
             match = re.search(pattern, address)
 
@@ -48,9 +49,10 @@ class Address:
     def from_string_pandas(cls, address):
         """
         Parse string address using pandas
-        :param address:
+        :param address: Input address in string ormat
         :return: Address object
         """
+
         # Create a DataFrame from the address string
         df = pd.DataFrame({'address': [address]})
 
