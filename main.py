@@ -1,6 +1,6 @@
 from address_separator import separator
 
-parser = separator.AddressSeparator()
+parser = separator.Separator()
 
 print(parser.separate("Winterallee 3"))
 print(parser.separate("Musterstrasse 45"))

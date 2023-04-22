@@ -1,8 +1,15 @@
+import os
+import sys
+from os.path import dirname
+
+# Add package path to syspath to prevent importing problems
+sys.path.append(dirname(__file__))
+
 from domain.address import Address
 from infra.validator import Validator
 
 
-class AddressSeparator:
+class Separator:
     """
     The AddressSeparator class is responsible for separating the street name and house number from the address string.
     """
