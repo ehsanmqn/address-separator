@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from os.path import dirname
@@ -14,7 +15,8 @@ class Separator:
     The AddressSeparator class is responsible for separating the street name and house number from the address string.
     """
 
-    def __init__(self):
+    def __init__(self, parser: str):
+        self.parser = parser
         self.validator = Validator()
 
     def separate(self, address_str):
@@ -23,8 +25,12 @@ class Separator:
             return {}
 
         # parse address into street and house number using Address class
-        try:
-            address = Address.from_string_simple(address_str)
-            return {"street": address.street, "housenumber": address.house_number}
-        except ValueError as error:
-            return {}
+        match self.parser:
+            case "regex":
+                address = Address.from_string_simple(address_str)
+            case "pandas":
+                address = Address.from_string_pandas(address_str)
+            case _:
+                raise ValueError("Parser method not supported.")
+
+        return {"street": address.street, "housenumber": address.house_number}
