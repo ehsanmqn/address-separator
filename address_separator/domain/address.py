@@ -23,6 +23,12 @@ class Address:
 
     @classmethod
     def from_string_simple(cls, address):
+        """
+        Parse string address using simple python regular expression
+        :param address:
+        :return: Address object
+        """
+
         # Iterate over each patter to find a match
         for pattern in cls.patterns:
             match = re.search(pattern, address)
@@ -38,19 +44,22 @@ class Address:
 
     @classmethod
     def from_string_pandas(cls, address):
-        # Convert patterns to DataFrame
-        df_patterns = pd.DataFrame(cls.patterns, columns=['pattern'])
+        """
+        Parse string address using pandas
+        :param address:
+        :return: Address object
+        """
+        # Create a DataFrame from the address string
+        df = pd.DataFrame({'address': [address]})
 
-        # Iterate over each pattern to find a match
-        for _, row in df_patterns.iterrows():
-            pattern = row['pattern']
-            match = re.search(pattern, address)
-            if match:
-                groups = match.groupdict()
+        # Extract the street name and house number using the defined patterns
+        for pattern in cls.patterns:
+            df[['street_name', 'house_number']] = df['address'].str.extract(pattern)
 
-                if groups['street'] is not None and groups['house_number'] is not None:
-                    street_name = groups['street'].strip()
-                    house_number = groups['house_number'].strip()
-                    return cls(street_name, house_number)
+            # If both street name and house number are extracted, create an Address object
+            if not df[['street_name', 'house_number']].isna().any().any():
+                street_name = df['street_name'][0].strip()
+                house_number = df['house_number'][0].strip()
+                return cls(street_name, house_number)
 
         raise ValueError(f"Invalid address: {address}")
