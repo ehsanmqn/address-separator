@@ -30,8 +30,10 @@ class Address:
         """
 
         # Iterate over each patter to find a match
+        counter = 0
         for pattern in cls.patterns:
             match = re.search(pattern, address)
+
             if match:
                 groups = match.groupdict()
 
@@ -54,12 +56,12 @@ class Address:
 
         # Extract the street name and house number using the defined patterns
         for pattern in cls.patterns:
-            df[['street_name', 'house_number']] = df['address'].str.extract(pattern)
+            result = df['address'].str.extract(pattern)
 
             # If both street name and house number are extracted, create an Address object
-            if not df[['street_name', 'house_number']].isna().any().any():
-                street_name = df['street_name'][0].strip()
-                house_number = df['house_number'][0].strip()
+            if not result[['street', 'house_number']].isna().any().any():
+                street_name = result['street'][0].strip()
+                house_number = result['house_number'][0].strip()
                 return cls(street_name, house_number)
 
         raise ValueError(f"Invalid address: {address}")
