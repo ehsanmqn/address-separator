@@ -37,19 +37,15 @@ The address-separator package implemented based on SOLID principles. The structu
 address-separator/
     address_separator/
         domain/
-            __init__.py
             address.py
         infra/
-            __init__.py
             validator.py
         tests/
-            __init__.py
             test_address_separator.py
-        __init__.py
-        install.sh
-        requirements.txt
         separator.py
-        setup.py
+    install.sh
+    requirements.txt
+    setup.py
     main.py
     README.md
 ```
