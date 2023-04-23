@@ -17,6 +17,13 @@ class Separator:
         self.validator = Validator()
 
     def separate(self, address_str, parser="regex"):
+        """
+        Parse given address regarding the parser type specified by the user
+        :param address_str: Input address string
+        :param parser: Parser method
+        :return: Dictionary object
+        """
+
         # validate address_str before processing
         if not self.validator.validate(address_str):
             return {}
@@ -30,4 +37,5 @@ class Separator:
             case _:
                 raise ValueError("Parser method not supported.")
 
+        # To improve the printing experience for non-unicode characters, dictionary used instead of `json
         return {"street": address.street, "housenumber": address.house_number}
