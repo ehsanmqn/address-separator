@@ -1,3 +1,5 @@
+import sys
+
 from address_separator import separator
 
 addresses = [
@@ -35,9 +37,15 @@ addresses = [
     "Avenue de Cortenbergh/Kortenberglaan 71-1"
 ]
 
-parser = separator.Separator()
 
-for address in addresses:
-    print("\nAddress: ", address)
-    print(parser.separate(address))
-    print(parser.separate(address, parser="pandas"))
+def main():
+    parser = separator.Separator()
+
+    for address in addresses:
+        print("\nAddress: ", address)
+        print(parser.separate(address))
+        print(parser.separate(address, parser="pandas"))
+
+
+if __name__ == '__main__':
+    sys.exit(main())
