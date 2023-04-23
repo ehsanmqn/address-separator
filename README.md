@@ -58,8 +58,7 @@ address-separator/
 This file contains a class named **Separator**. This class has a method "separate" that receives an address string and an optional "parser" parameter.
 The purpose of this class is to separate the street name and house number from the address string using either regex or pandas library, depending on the value of the "parser" parameter.
 
-Before processing the address string, it performs validation using the "Validator" class defined in the "infra" module. If the address string fails the validation, the method returns an empty dictionary.
-If the address string passes the validation, the method separates the street name and house number using the appropriate parser based on the value of the "parser" parameter. It then returns a dictionary containing the separated street name and house number.
+Before processing the address string, it performs validation using the "Validator" class defined in the "infra" module (The Validator class not implemented.)
 
 Overall, this code implements a simple address parsing functionality that can be used for various applications, such as geocoding or database integration.
 
