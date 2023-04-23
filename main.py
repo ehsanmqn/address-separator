@@ -32,7 +32,7 @@ addresses = [
     "Plaça de Catalunya 14",
     "Kärntner Straße 15",
     "Nieuwezijds Voorburgwal 165",
-    "Avenue de Cortenbergh/Kortenberglaan 71"
+    "Avenue de Cortenbergh/Kortenberglaan 71-1"
 ]
 
 parser = separator.Separator()

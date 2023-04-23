@@ -171,11 +171,11 @@ class TestAddressSeparator(unittest.TestCase):
         result = self.separator.separate("7 Rue de Rivoli")
         self.assertEqual(result, {'street': 'Rue de Rivoli', 'housenumber': '7'})
 
-    def test_separate_method_for_dashed_address(self):
+    def test_separate_method_for_hyphens_address(self):
         result = self.separator.separate("Max-Joseph-Platz 1")
         self.assertEqual(result, {'street': 'Max-Joseph-Platz', 'housenumber': '1'})
 
-    def test_separate_method_for_dashed_with_dot_address(self):
+    def test_separate_method_for_hyphens_with_dot_address(self):
         result = self.separator.separate("Max-Joseph-Platz, No. 1")
         self.assertEqual(result, {'street': 'Max-Joseph-Platz', 'housenumber': 'No. 1'})
 
