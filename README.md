@@ -6,16 +6,20 @@ street names and numbers into its JSON format containing street address and the 
 ### Manual
 To install the Address Separator package, clone the repository from GitHub and install the requirements:
 ```bash
-git clone https://github.com/your_username/address_separator.git
-cd address_separator
+git clone https://github.com/ehsanmqn/address-separator
+cd address-separator
+virtualenv -p python3 venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Pip
+### Build and Pip
 Use following commands to build and install the address separator package in your desired environment:
 ```bash
-cd address_separator
-bash install.sh
+git clone https://github.com/ehsanmqn/address-separator
+cd address-separator
+chmod +x install.sh
+./install.sh
 ```
 
 ## Usage
