@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-setup(name='address-separator',
+setup(name='address_separator',
       version='1.0',
       description='Address parser',
       author='Ehsan Maiqani',
